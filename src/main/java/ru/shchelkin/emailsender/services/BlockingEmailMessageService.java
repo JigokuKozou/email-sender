@@ -25,18 +25,18 @@ public class BlockingEmailMessageService implements EmailMessageService {
     
     @Override
     public void sendMessage(@NonNull EmailMessage emailMessage) {
-        if (Strings.isBlank(emailMessage.getDestinationEmail()))
+        if (Strings.isBlank(emailMessage.destinationEmail()))
             throw new IllegalArgumentException("destinationEmail cannot be blank");
 
-        if (Strings.isBlank(emailMessage.getHeader()) && Strings.isBlank(emailMessage.getHeader()))
+        if (Strings.isBlank(emailMessage.header()) && Strings.isBlank(emailMessage.header()))
             throw new IllegalArgumentException("message cannot be empty");
 
         try {
-            SimpleMailMessage message = new SimpleMailMessage();
+            final SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(fromEmail);
-            message.setTo(emailMessage.getDestinationEmail());
-            message.setSubject(emailMessage.getHeader());
-            message.setText(emailMessage.getBody());
+            message.setTo(emailMessage.destinationEmail());
+            message.setSubject(emailMessage.header());
+            message.setText(emailMessage.body());
 
             javaMailSender.send(message);
             log.info("Message is sent to " + Arrays.toString(message.getTo()));

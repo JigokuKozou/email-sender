@@ -24,3 +24,12 @@ spring:
             required: true
           ssl:
             enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+# swagger-ui custom path
+springdoc:
+  swagger-ui.path: /swagger-ui.html
